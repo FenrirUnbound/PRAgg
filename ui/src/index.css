@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.panelTitle {
+  font-size: 1.25em;
+}
+
+.panelFooter {
+  font-size: 0.9em;
+}
