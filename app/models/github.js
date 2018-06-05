@@ -1,8 +1,7 @@
 'use strict';
 
-const chain = require('./chain');
-const OrgChain = chain.OrgChain;
-const RepoChain = chain.RepoChain;
+const { OrgChain, RepoChain } = require('./chain');
+const { FlattenPayload, SortByNew } = require('./sharedChain');
 const octokit = require('@octokit/rest')
 const client = Symbol('client');
 
@@ -19,7 +18,7 @@ class FetchRepoPulls extends RepoChain {
                 owner: org,
                 repo
             });
-        } catch(e) {
+        } catch (e) {
             console.error(`Error encountered while fetching PR data for ${org}/${repo}`);
             console.error(e);
         }
@@ -44,8 +43,8 @@ class CherryPickData extends RepoChain {
             updated: updated_at,
             url: html_url,
             user: {
-              login: user.login,
-              url: user.html_url
+                login: user.login,
+                url: user.html_url
             }
         }));
 
@@ -69,35 +68,6 @@ class FetchOrgPulls extends OrgChain {
         const result = repoPRs.map(repo => repo.data);
 
         return { client, org, repos, data: result };
-    }
-}
-
-class FlattenPayload extends OrgChain {
-    /**
-     * Flatten an array of arrays into a single-level array
-     */
-    async _exec({ client, org, repos, data = [] }) {
-        const result = data.reduce((agg, repo) => {
-            // only process repositories with PRs (e.g., > 0)
-            if (repo.length) {
-                repo.forEach(pr => agg.push(pr));
-            }
-
-            return agg;
-        }, []);
-
-        return { client, org, repos, data: result };
-    }
-}
-
-class SortByNew extends OrgChain {
-    /**
-     * Sort the PRs by most-recently updated to haven't-updated-in-a-while
-     */
-    async _exec(config) {
-        config.data.sort((a, b) => (new Date(b.updated) - new Date(a.updated)));
-
-        return config;
     }
 }
 
@@ -131,7 +101,7 @@ class Github {
             });
 
             pullRequestData = data;
-        } catch(e) {
+        } catch (e) {
             console.error('error');
             console.error(e);
         }
