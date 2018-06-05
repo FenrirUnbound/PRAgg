@@ -1,0 +1,11 @@
+auth:
+  github: ""
+scm:
+- type: github
+  api: https://api.github.com
+  name: "Github.com"
+  org: ""
+  repos: []
+  token: ""
+server:
+  port: 5000

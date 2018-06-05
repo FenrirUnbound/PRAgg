@@ -1,0 +1,4 @@
+auth:
+  github: GITHUB_TOKEN
+server:
+  port: PORT

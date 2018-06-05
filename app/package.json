@@ -1,0 +1,30 @@
+{
+  "name": "fenrirunbound-pragg-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha tests/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/FenrirUnbound/PRAgg"
+  },
+  "author": "aeneascorrupt@gmail.com",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "@octokit/rest": "^15.8.1",
+    "config": "^1.30.0",
+    "good": "^8.1.1",
+    "good-console": "^7.1.0",
+    "good-squeeze": "^5.1.0",
+    "hapi": "^17.5.1",
+    "inert": "^5.1.0",
+    "js-yaml": "^3.12.0"
+  }
+}
