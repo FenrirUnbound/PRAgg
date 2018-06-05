@@ -28,7 +28,7 @@ const LOGGER_OPTIONS = {
 
 module.exports = async (server) => {
   const registration = [
-    server.register(require('inert')),
+    server.register(require('./static')),
     server.register({
       plugin: require('good'),
       options: LOGGER_OPTIONS

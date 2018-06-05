@@ -86,8 +86,6 @@ class FlattenPayload extends OrgChain {
             return agg;
         }, []);
 
-        console.log(result);
-
         return { client, org, repos, data: result };
     }
 }
