@@ -3,6 +3,7 @@
 const config = require('config');
 
 const STRATEGIES = {
+    bitbucket: require('../models/bitbucket'),
     github: require('../models/github')
 };
 
@@ -19,13 +20,20 @@ module.exports = {
                     const Strategy = STRATEGIES[scm.type];
 
                     if (!Strategy) {
-                        throw new Error(`Unknown strategy ${scm.name}`);
+                        console.error(`Unknown strategy "${scm.name}". Skipping...`);
+
+                        // todo: silent failures should be known
+                        return Promise.resolve({
+                            name: scm.name,
+                            amount: 0,
+                            pullRequests: []
+                        });
                     }
 
                     const client = new Strategy({
                         api: scm.api,
                         name: scm.name,
-                        token: scm.token || config.get('auth').github
+                        token: scm.token || config.get('auth')[scm.type]
                     });
 
                     try {

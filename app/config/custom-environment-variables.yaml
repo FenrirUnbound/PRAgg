@@ -1,4 +1,5 @@
 auth:
+  bitbucket: BITBUCKET_TOKEN
   github: GITHUB_TOKEN
 server:
   port: PORT

@@ -1,6 +1,27 @@
 'use strict';
 
-const OrgChain = require('./chain').OrgChain;
+const { OrgChain, RepoChain } = require('./chain');
+
+class FetchRepoPulls extends RepoChain {
+    /**
+     * Fetch all PRs in a given repository
+     */
+    async _exec({ client, org, repo, data = [] }) {
+        let result = [];
+
+        try {
+            result = await client.pullRequests.getAll({
+                owner: org,
+                repo
+            });
+        } catch (e) {
+            console.error(`Error encountered while fetching PR data for ${org}/${repo}`);
+            console.error(e);
+        }
+
+        return { client, org, repo, data: result.data };
+    }
+}
 
 class FlattenPayload extends OrgChain {
     /**
@@ -32,6 +53,7 @@ class SortByNew extends OrgChain {
 }
 
 module.exports = {
+    FetchRepoPulls,
     FlattenPayload,
     SortByNew
 };
