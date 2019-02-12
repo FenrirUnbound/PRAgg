@@ -1,5 +1,6 @@
 auth:
   bitbucket: BITBUCKET_TOKEN
   github: GITHUB_TOKEN
+  gitlab: GITLAB_TOKEN
 server:
   port: PORT

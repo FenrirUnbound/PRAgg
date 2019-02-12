@@ -4,7 +4,8 @@ const config = require('config');
 
 const STRATEGIES = {
     bitbucket: require('../models/bitbucket'),
-    github: require('../models/github')
+    github: require('../models/github'),
+    gitlab: require('../models/gitlab')
 };
 
 module.exports = {

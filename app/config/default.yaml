@@ -1,6 +1,7 @@
 auth:
   bitbucket: ""
   github: ""
+  gitlab: ""
 scm:
 - type: github
   api: https://api.github.com
